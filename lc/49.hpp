@@ -22,5 +22,3 @@ class Solution {
     return ret;
   }
 };
-
-int main() { return 0; }

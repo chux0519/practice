@@ -10,10 +10,9 @@ struct ListNode {
 };
 
 class Solution {
-public:
+ public:
   ListNode *rotateRight(ListNode *head, int k) {
-    if (!head)
-      return head;
+    if (!head) return head;
     ListNode *tail = head;
     ListNode *cur = head;
     int len = 0;
@@ -23,8 +22,7 @@ public:
       len += 1;
     }
     k %= len;
-    if (k == 0)
-      return head;
+    if (k == 0) return head;
     k = len - k;
     cur = head;
     while (--k) {
@@ -39,5 +37,3 @@ public:
     return new_head;
   }
 };
-
-int main() { return 0; }

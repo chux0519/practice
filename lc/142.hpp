@@ -34,5 +34,3 @@ class Solution {
     return ptr;
   }
 };
-
-int main() { return 0; }

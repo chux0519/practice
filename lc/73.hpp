@@ -29,4 +29,4 @@ class Solution {
   }
 };
 
-int main() { return 0; }
+// O(1) space

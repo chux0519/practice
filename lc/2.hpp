@@ -10,7 +10,7 @@ struct ListNode {
 };
 
 class Solution {
-public:
+ public:
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
     ListNode *ret = new ListNode();
     ListNode *p = ret;
@@ -18,10 +18,8 @@ public:
     int cur = 0;
     while (l1 || l2) {
       cur = 0;
-      if (l1)
-        cur += l1->val;
-      if (l2)
-        cur += l2->val;
+      if (l1) cur += l1->val;
+      if (l2) cur += l2->val;
       cur += c;
       if (cur >= 10) {
         c = 1;
@@ -32,16 +30,11 @@ public:
       ListNode *node = new ListNode(cur);
       p->next = node;
       p = p->next;
-      if (l1)
-        l1 = l1->next;
-      if (l2)
-        l2 = l2->next;
+      if (l1) l1 = l1->next;
+      if (l2) l2 = l2->next;
     }
 
-    if (c)
-      p->next = new ListNode(c);
+    if (c) p->next = new ListNode(c);
     return ret->next;
   }
 };
-
-int main() { return 0; }

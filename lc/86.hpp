@@ -9,7 +9,7 @@ struct ListNode {
   ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
 class Solution {
-public:
+ public:
   ListNode *partition(ListNode *head, int x) {
     ListNode l(-1), r(-1);
     ListNode *lp = &l, *rp = &r;

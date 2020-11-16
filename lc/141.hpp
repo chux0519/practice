@@ -24,5 +24,3 @@ class Solution {
     return false;
   }
 };
-
-int main() { return 0; }
