@@ -35,6 +35,25 @@ static int random_level() {
   return level;
 }
 
+static void _skiplist_remove(skiplist *list, skipnode *node, int level) {
+  for (int i = 0; i < level; i++) {
+    // delete the link in level i of node
+    skiplink *link = &node->levels[i];
+    skiplink *prev = link->prev;
+    skiplink *next = link->next;
+    prev->next = next;
+    next->prev = prev;
+    link->prev = link;
+    link->next = link;
+
+    // check if the level changed
+    if (list->entries[i].next == &list->entries[i] && list->level > 1)
+      list->level--;
+  }
+  skipnode_destroy(node);
+  list->length--;
+}
+
 /////// static end
 
 skiplist *skiplist_new() {
@@ -113,8 +132,8 @@ void skiplist_remove(skiplist *list, int k) {
     while (entry != right) {
       skipnode *node = container_of(entry, skipnode, levels[i]);
       if (node->key == k) {
-        // delete
-        // TODO
+        entry = entry->next;
+        _skiplist_remove(list, node, i + 1);
       } else if (node->key < k) {
         entry = entry->next;
       } else {
@@ -126,7 +145,7 @@ void skiplist_remove(skiplist *list, int k) {
 }
 
 const skipnode *skiplist_find(skiplist *list, int k) {
-  // will return first node with key: k
+  // will return first found node with key: k
   for (int i = list->level - 1; i >= 0; i--) {
     skiplink *entry = list->entries[i].next;
     skiplink *right = &list->entries[i];
